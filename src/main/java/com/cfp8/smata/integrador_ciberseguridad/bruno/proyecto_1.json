@@ -1,0 +1,173 @@
+{
+  "version": "1",
+  "name": "proyecto_1",
+  "items": [
+    {
+      "name": "MitigadoUsernameAdmin",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "get",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "MitigadoUsernameAdmin.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/proyecto_1/MitigadoUsernameAdmin.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.00029754638671875,
+      "depth": 1
+    },
+    {
+      "name": "MitigadoUsernameJuan99",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "get",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "MitigadoUsernameJuan99.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/proyecto_1/MitigadoUsernameJuan99.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.00030040740966796875,
+      "depth": 1
+    },
+    {
+      "name": "VulnerableUsername",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "get",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "VulnerableUsername.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/proyecto_1/VulnerableUsername.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.00029659271240234375,
+      "depth": 1
+    },
+    {
+      "name": "VulnerambreUsernameAdmin",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "get",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "VulnerambreUsernameAdmin.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/proyecto_1/VulnerambreUsernameAdmin.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.00030231475830078125,
+      "depth": 1
+    }
+  ],
+  "environments": [],
+  "runtimeVariables": {},
+  "brunoConfig": {
+    "opencollection": "1.0.0",
+    "name": "proyecto_1",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "proxy": {
+      "inherit": true,
+      "config": {
+        "protocol": "http",
+        "hostname": "",
+        "port": "",
+        "auth": {
+          "username": "",
+          "password": ""
+        },
+        "bypassProxy": ""
+      }
+    }
+  },
+  "securityConfig": {
+    "jsSandboxMode": "safe"
+  },
+  "settingsSelectedTab": "overview",
+  "folderLevelSettingsSelectedTab": {},
+  "allTags": [],
+  "format": "yml",
+  "importedAt": 1790169776072,
+  "lastAction": null,
+  "isLoading": false,
+  "root": {
+    "meta": null,
+    "request": null,
+    "docs": null
+  },
+  "globalEnvironmentVariables": {},
+  "globalEnvSecrets": [],
+  "exportedAt": "2026-09-23T13:23:05.232Z",
+  "exportedUsing": "Bruno VS Code Extension"
+}

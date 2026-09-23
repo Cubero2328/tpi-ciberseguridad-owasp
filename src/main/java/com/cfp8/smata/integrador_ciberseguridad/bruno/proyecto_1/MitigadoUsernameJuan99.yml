@@ -1,0 +1,18 @@
+info:
+  name: MitigadoUsernameJuan99
+  type: http
+
+http:
+  method: GET
+  url: http://localhost:8080/api/proyecto1/buscar-mitigado?username=juan99
+  params:
+    - name: username
+      value: juan99
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

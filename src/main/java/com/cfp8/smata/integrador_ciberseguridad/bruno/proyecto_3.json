@@ -1,0 +1,142 @@
+{
+  "version": "1",
+  "name": "proyecto_3",
+  "items": [
+    {
+      "name": "Comentarios",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "get",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "Comentarios.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/proyecto_3/Comentarios.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.00020503997802734375,
+      "depth": 1
+    },
+    {
+      "name": "GuardarMitigado",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "post",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "GuardarMitigado.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/proyecto_3/GuardarMitigado.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.00031375885009765625,
+      "depth": 1
+    },
+    {
+      "name": "GuardarVulnerable",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "post",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "GuardarVulnerable.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/proyecto_3/GuardarVulnerable.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.00033092498779296875,
+      "depth": 1
+    }
+  ],
+  "environments": [],
+  "runtimeVariables": {},
+  "brunoConfig": {
+    "opencollection": "1.0.0",
+    "name": "proyecto_3",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "proxy": {
+      "inherit": true,
+      "config": {
+        "protocol": "http",
+        "hostname": "",
+        "port": "",
+        "auth": {
+          "username": "",
+          "password": ""
+        },
+        "bypassProxy": ""
+      }
+    }
+  },
+  "securityConfig": {
+    "jsSandboxMode": "safe"
+  },
+  "settingsSelectedTab": "overview",
+  "folderLevelSettingsSelectedTab": {},
+  "allTags": [],
+  "format": "yml",
+  "importedAt": 1790169808438,
+  "lastAction": null,
+  "root": {
+    "meta": null,
+    "request": null,
+    "docs": null
+  },
+  "isLoading": false,
+  "globalEnvironmentVariables": {},
+  "globalEnvSecrets": [],
+  "exportedAt": "2026-09-23T13:23:29.213Z",
+  "exportedUsing": "Bruno VS Code Extension"
+}

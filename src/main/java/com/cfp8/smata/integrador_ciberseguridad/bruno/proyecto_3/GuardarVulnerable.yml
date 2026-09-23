@@ -1,0 +1,21 @@
+info:
+  name: GuardarVulnerable
+  type: http
+
+http:
+  method: POST
+  url: http://localhost:8080/api/proyecto3/guardar-vulnerable
+  body:
+    type: json
+    data: |-
+      {
+        "autor":"Nestor",
+        "contenido":"Viva Peron Carajo"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

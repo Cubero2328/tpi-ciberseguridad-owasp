@@ -1,0 +1,18 @@
+info:
+  name: MitigadoDenegado
+  type: http
+
+http:
+  method: GET
+  url: http://localhost:8080/api/proyecto2/factura-mitigado/3?usuarioLogueado=juan99
+  params:
+    - name: usuarioLogueado
+      value: juan99
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

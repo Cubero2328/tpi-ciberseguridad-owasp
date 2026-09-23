@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 2: Control de Acceso Roto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+
+<body>
+
+    <div class="container mt-4">
+        <a href="/" class="btn btn-outline-secondary btn-sm mb-3">← Volver al Panel Central</a>
+        
+        <div class="p-4 shadow-sm bg-white rounded-3 mb-4">
+            <h2 class="fw-bold text-dark">OWASP A01: Control de Acceso Roto (IDOR)</h2>
+            <p class="text-muted mb-0">
+                Esta demostración simula un ataque de <strong>Referencia Directa Insegura a Objetos (IDOR)</strong>. Un usuario legítimo intenta cambiar el ID de la factura en el buscador web para intentar leer facturas confidenciales de otros usuarios.
+            </p>
+        </div>
+
+        <!-- Selector de sesión simulada -->
+        <div class="card mb-4 border-0 shadow-sm bg-dark text-white">
+            <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                    <h5 class="mb-1 fw-bold text-warning">👤 Simulación de Sesión Activa</h5>
+                    <p class="small text-light-50 mb-0">Estás navegando en el sistema autenticado bajo la siguiente identidad:</p>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <select id="selectUsuario" class="form-select font-monospace" onchange="actualizarInterfazUsuario()">
+                        <option value="juan99">juan99 (Usuario Estándar)</option>
+                        <option value="ana_security">ana_security (Usuario Estándar)</option>
+                        <option value="admin">admin (Administrador Global)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <!-- COLUMNA VULNERABLE -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm card-vulnerable">
+                    <div class="card-body">
+                        <span class="badge bg-danger mb-2">CÓDIGO INSEGURO</span>
+                        <h4 class="card-title fw-bold">Consulta sin Verificación</h4>
+                        <p class="small text-muted">El controlador procesa y expone el recurso basándose solo en el ID de la URL.</p>
+                        
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Buscar Factura por ID (Prueba el ID 3 o 4 de otros usuarios)</label>
+                            <div class="input-group">
+                                <input type="number" id="idFacturaVulnerable" class="form-control" value="1">
+                                <button class="btn btn-danger" onclick="consultarFactura('vulnerable')">Consultar ID</button>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold mt-4">Respuesta del Servidor:</h6>
+                        <div id="resVulnerable" class="p-3 border rounded bg-white text-muted small" style="min-height: 120px;">
+                            No se ha realizado la consulta.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA MITIGADA -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm card-mitigado">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">CÓDIGO MITIGADO</span>
+                        <h4 class="card-title fw-bold">Consulta Validada</h4>
+                        <p class="small text-muted">El servicio valida si el propietario del recurso coincide estrictamente con la sesión.</p>
+                        
+                        <div class="mb-3">
+                            <label class="form-label text-muted">Buscar Factura por ID (El sistema validará tus permisos)</label>
+                            <div class="input-group">
+                                <input type="number" id="idFacturaMitigado" class="form-control" value="1">
+                                <button class="btn btn-success" onclick="consultarFactura('mitigado')">Consultar Seguro</button>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold mt-4">Respuesta del Servidor:</h6>
+                        <div id="resMitigado" class="p-3 border rounded bg-white text-muted small" style="min-height: 120px;">
+                            No se ha realizado la consulta.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function consultarFactura(tipo) {
+            const userLogueado = document.getElementById('selectUsuario').value;
+            const idInput = document.getElementById(tipo === 'vulnerable' ? 'idFacturaVulnerable' : 'idFacturaMitigado');
+            const contenedor = document.getElementById(tipo === 'vulnerable' ? 'resVulnerable' : 'resMitigado');
+            
+            const id = idInput.value;
+            if(!id) return;
+
+            contenedor.innerHTML = 'Cargando...';
+
+            let url = `/api/proyecto2/factura-vulnerable/${id}`;
+            if (tipo === 'mitigado') {
+                url = `/api/proyecto2/factura-mitigado/${id}?usuarioLogueado=${userLogueado}`;
+            }
+
+            fetch(url)
+                .then(response => {
+                    if (response.status === 403) {
+                        throw new Error("❌ 403 Forbidden: ACCESO DENEGADO. No eres el propietario de este recurso.");
+                    }
+                    if (response.status === 404) {
+                        throw new Error("⚠️ 404 Not Found: El registro de factura solicitado no existe.");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    contenedor.innerHTML = `
+                        <div class="alert alert-success p-2 m-0 mb-2"><strong>¡Acceso Exitoso!</strong></div>
+                        <strong>Propietario:</strong> <span class="badge bg-dark">${data.propietario}</span><br>
+                        <strong>Detalle:</strong> ${data.detalle}<br>
+                        <strong>Monto:</strong> <span class="text-success fw-bold">$${data.monto}</span><br>
+                        <strong>Fecha Emisión:</strong> ${data.fecha}
+                    `;
+                })
+                .catch(error => {
+                    contenedor.innerHTML = `<div class="alert alert-danger p-2 m-0">${error.message}</div>`;
+                });
+        }
+
+        function actualizarInterfazUsuario() {
+            document.getElementById('resVulnerable').innerHTML = "Sesión cambiada. Listo para consultar.";
+            document.getElementById('resMitigado').innerHTML = "Sesión cambiada. Listo para consultar.";
+        }
+    </script>
+</body>
+</html>

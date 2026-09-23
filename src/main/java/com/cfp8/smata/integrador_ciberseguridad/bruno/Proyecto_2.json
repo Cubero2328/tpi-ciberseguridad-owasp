@@ -1,0 +1,173 @@
+{
+  "version": "1",
+  "name": "Proyecto_2",
+  "items": [
+    {
+      "name": "Mitigado1",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "get",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "Mitigado1.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/Proyecto_2/Mitigado1.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.00030422210693359375,
+      "depth": 1
+    },
+    {
+      "name": "MitigadoDenegado",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "get",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "MitigadoDenegado.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/Proyecto_2/MitigadoDenegado.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.0003108978271484375,
+      "depth": 1
+    },
+    {
+      "name": "VulnerableId1",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "get",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "VulnerableId1.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/Proyecto_2/VulnerableId1.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.0002155303955078125,
+      "depth": 1
+    },
+    {
+      "name": "VulnerableId2",
+      "type": "http",
+      "seq": 1,
+      "tags": [],
+      "request": {
+        "method": "get",
+        "url": "",
+        "params": [],
+        "headers": [],
+        "auth": {
+          "mode": "none"
+        },
+        "body": {
+          "mode": "none"
+        },
+        "script": {},
+        "vars": {},
+        "assertions": [],
+        "tests": "",
+        "docs": ""
+      },
+      "settings": {},
+      "filename": "VulnerableId2.yml",
+      "pathname": "c:/Users/silfr/Desktop/Pablo/Especializaciones_Programacion/Incidentes_de_ciberseguridad/TPIntegrador/integrador-ciberseguridad/src/main/java/com/cfp8/smata/integrador_ciberseguridad/bruno/Proyecto_2/VulnerableId2.yml",
+      "draft": null,
+      "partial": true,
+      "loading": false,
+      "size": 0.0002155303955078125,
+      "depth": 1
+    }
+  ],
+  "environments": [],
+  "runtimeVariables": {},
+  "brunoConfig": {
+    "opencollection": "1.0.0",
+    "name": "Proyecto_2",
+    "type": "collection",
+    "ignore": [
+      "node_modules",
+      ".git"
+    ],
+    "proxy": {
+      "inherit": true,
+      "config": {
+        "protocol": "http",
+        "hostname": "",
+        "port": "",
+        "auth": {
+          "username": "",
+          "password": ""
+        },
+        "bypassProxy": ""
+      }
+    }
+  },
+  "securityConfig": {
+    "jsSandboxMode": "safe"
+  },
+  "settingsSelectedTab": "overview",
+  "folderLevelSettingsSelectedTab": {},
+  "allTags": [],
+  "format": "yml",
+  "importedAt": 1790169800519,
+  "lastAction": null,
+  "root": {
+    "meta": null,
+    "request": null,
+    "docs": null
+  },
+  "isLoading": false,
+  "globalEnvironmentVariables": {},
+  "globalEnvSecrets": [],
+  "exportedAt": "2026-09-23T13:23:21.917Z",
+  "exportedUsing": "Bruno VS Code Extension"
+}

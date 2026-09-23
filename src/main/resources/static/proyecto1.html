@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proyecto 1: Laboratorio de Inyección SQL</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navegación -->
+    <div class="container mt-4">
+        <a href="/" class="btn btn-outline-secondary btn-sm mb-3">← Volver al Panel Central</a>
+
+        <div class="p-4 shadow-sm bg-white rounded-3 mb-4">
+            <h2 class="fw-bold text-dark">OWASP A05: Inyección SQL (SQLi)</h2>
+            <p class="text-muted mb-0">
+                Este laboratorio demuestra cómo un atacante puede alterar la lógica de una consulta SQL estructurada
+                mapeada mediante queries nativas, y cómo Spring Data JPA lo soluciona parametrizando los valores de
+                forma segura.
+            </p>
+        </div>
+
+        <!-- Payloads recomendados para la demo -->
+        <div class="card mb-4 bg-light border-0 shadow-sm">
+            <div class="card-body">
+                <h5 class="fw-bold text-primary">🧬 Payloads de Prueba para la Defensa / Exposición:</h5>
+                <p class="small text-muted mb-2">Haz clic en cualquier payload para copiarlo al portapapeles y probarlo
+                    en los buscadores de abajo:</p>
+                <div class="d-flex flex-wrap gap-2">
+                    <button class="btn btn-sm btn-dark font-monospace" onclick="copiarPayload('juan')">juan</button>
+                    <button class="btn btn-sm btn-danger font-monospace" onclick="copiarPayload('\' OR \'1\'=\'1')">' OR
+                        '1'='1</button>
+                    <button class="btn btn-sm btn-danger font-monospace" onclick="copiarPayload('\' OR rol=\'ADMIN')">'
+                        OR rol='ADMIN</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Laboratorios (Doble Columna) -->
+        <div class="row g-4">
+
+            <!-- COLUMNA 1: ENTORNO VULNERABLE -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm card-vulnerable">
+                    <div class="card-body">
+                        <span class="badge bg-danger mb-2">CÓDIGO INSEGURO</span>
+                        <h4 class="card-title fw-bold">Buscador Vulnerable</h4>
+                        <p class="small text-muted">Ejecuta una consulta nativa construida por concatenación directa de
+                            strings.</p>
+
+                        <div class="mb-3">
+                            <label class="form-label font-monospace text-muted">SELECT * FROM usuarios_sql WHERE
+                                username LIKE '%...%'</label>
+                            <div class="input-group">
+                                <input type="text" id="inputVulnerable" class="form-control"
+                                    placeholder="Escribe el nombre de usuario o payload...">
+                                <button class="btn btn-danger" onclick="buscar('vulnerable')">Buscar (SQLi)</button>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold mt-4">Resultados devueltos por el Servidor:</h6>
+                        <div id="resultadosVulnerable" class="border rounded p-2 bg-white text-muted small"
+                            style="min-height: 150px; max-height: 300px; overflow-y: auto;">
+                            No se han realizado búsquedas aún.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COLUMNA 2: ENTORNO MITIGADO -->
+            <div class="col-md-6">
+                <div class="card h-100 shadow-sm card-mitigado">
+                    <div class="card-body">
+                        <span class="badge bg-success mb-2">CÓDIGO MITIGADO</span>
+                        <h4 class="card-title fw-bold">Buscador Seguro</h4>
+                        <p class="small text-muted">Utiliza los métodos de derivación automática de Spring Data JPA con
+                            tipos seguros.</p>
+
+                        <div class="mb-3">
+                            <label
+                                class="form-label font-monospace text-muted">repository.findByUsernameContaining(criterio)</label>
+                            <div class="input-group">
+                                <input type="text" id="inputMitigado" class="form-control"
+                                    placeholder="Escribe el nombre de usuario o payload...">
+                                <button class="btn btn-success" onclick="buscar('mitigado')">Buscar Seguro</button>
+                            </div>
+                        </div>
+
+                        <h6 class="fw-bold mt-4">Resultados devueltos por el Servidor:</h6>
+                        <div id="resultadosMitigado" class="border rounded p-2 bg-white text-muted small"
+                            style="min-height: 150px; max-height: 300px; overflow-y: auto;">
+                            No se han realizado búsquedas aún.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Integrado para consumir la API de Spring Boot -->
+    <script>
+        // Función general para ejecutar las búsquedas HTTP
+        function buscar(tipo) {
+            const inputId = tipo === 'vulnerable' ? 'inputVulnerable' : 'inputMitigado';
+            const contenedorId = tipo === 'vulnerable' ? 'resultadosVulnerable' : 'resultadosMitigado';
+
+            const criterio = document.getElementById(inputId).value;
+            const contenedor = document.getElementById(contenedorId);
+
+            contenedor.innerHTML = '<div class="text-center py-3"><div class="spinner-border spinner-border-sm text-secondary"></div> Buscando...</div>';
+
+            // Llamada AJAX al controlador de Spring Boot correspondiente
+            fetch(`/api/proyecto1/buscar-${tipo}?username=${encodeURIComponent(criterio)}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Error en la respuesta del servidor");
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.length === 0) {
+                        contenedor.innerHTML = '<div class="alert alert-warning m-0 py-2">Ningún usuario coincide con la búsqueda.</div>';
+                        return;
+                    }
+
+                    // Renderizar tabla con los resultados devueltos por los DTOs
+                    let htmlTable = `
+                        <table class="table table-sm table-striped m-0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Rol</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                    `;
+
+                    data.forEach(user => {
+                        htmlTable += `
+                            <tr>
+                                <td><strong>${user.id}</strong></td>
+                                <td><span class="badge bg-secondary">${user.username}</span></td>
+                                <td>${user.email}</td>
+                                <td><span class="badge ${user.rol === 'ADMIN' ? 'bg-dark' : 'bg-light text-dark'}">${user.rol}</span></td>
+                            </tr>
+                        `;
+                    });
+
+                    htmlTable += '</tbody></table>';
+                    contenedor.innerHTML = htmlTable;
+                })
+                .catch(error => {
+                    contenedor.innerHTML = `<div class="alert alert-danger m-0 py-2">Error: ${error.message}</div>`;
+                });
+        }
+
+        // Utilidad interactiva para la demo
+        function copiarPayload(texto) {
+            document.getElementById('inputVulnerable').value = texto;
+            document.getElementById('inputMitigado').value = texto;
+        }
+    </script>
+</body>
+
+</html>
